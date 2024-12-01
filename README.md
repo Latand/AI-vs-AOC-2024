@@ -37,5 +37,5 @@ aoc-2024/
 To run a specific day's solution:
 
 ```bash
-python day_XX/solution.py
+cd day_XX && python solution.py
 ```
