@@ -1,5 +1,6 @@
 from enum import Enum
 from typing import List, Set, Tuple
+import time
 
 
 class Direction(Enum):
@@ -100,28 +101,90 @@ def part1(data: str) -> int:
 
 
 def part2(data: str) -> int:
-    # Parse the grid and get starting position
+    # Start timing
+    start_time = time.perf_counter()
+
     grid, start_pos, start_dir = parse_grid(data)
-    loop_positions = 0
 
-    # Try each position
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            # Skip if position is already occupied or is start position
-            if grid[i][j] != "." or (i, j) == start_pos:
-                continue
+    # First, let's find all positions that the guard visits before leaving the map.
+    # We'll store the full path (pos, direction) steps.
+    visited_positions: Set[Tuple[int, int]] = set()
+    path = []
 
-            # Try placing obstacle here
-            grid[i][j] = "#"
+    # Simulate the guard's path normally (without any new obstruction)
+    pos, direction = start_pos, start_dir
+    visited_positions.add(pos)
+    path.append((pos, direction))
+    while True:
+        next_pos = next_position(pos, direction)
+        if not is_valid_position(next_pos, grid):
+            break
+        if grid[next_pos[0]][next_pos[1]] == "#":
+            # Turn right
+            direction = direction.turn_right()
+        else:
+            # Move forward
+            pos = next_pos
+            visited_positions.add(pos)
+        path.append((pos, direction))
 
-            # Check if this creates a loop
-            if detect_loop(grid, start_pos, start_dir):
-                loop_positions += 1
+    # We now know which positions were visited before leaving.
+    # We need to check which positions, if turned into an obstacle, would create a loop.
 
-            # Reset the position
-            grid[i][j] = "."
+    # The guard cannot see us place an obstruction at their starting position.
+    # Also, we must consider only positions that are not originally obstacles.
+    possible_positions = [
+        p for p in visited_positions if p != start_pos and grid[p[0]][p[1]] != "#"
+    ]
 
-    return loop_positions
+    loop_count = 0
+
+    # To detect a loop, we re-simulate the guard's movement with the new obstruction.
+    # If we ever revisit the same (pos, direction) state, we have a loop.
+    # We'll give a reasonable upper bound iteration limit to detect loops (e.g. number of grid cells * 4 directions).
+
+    rows, cols = len(grid), len(grid[0])
+    max_steps = rows * cols * 4 * 5  # heuristic upper bound
+
+    for obstruct in possible_positions:
+        # Modify grid temporarily
+        original = grid[obstruct[0]][obstruct[1]]
+        grid[obstruct[0]][obstruct[1]] = "#"
+
+        pos, direction = start_pos, start_dir
+        seen_states = set()
+        seen_states.add((pos, direction))
+
+        loop_found = False
+        for _ in range(max_steps):
+            next_pos = next_position(pos, direction)
+            if not is_valid_position(next_pos, grid):
+                # Guard leaves
+                break
+            if grid[next_pos[0]][next_pos[1]] == "#":
+                direction = direction.turn_right()
+            else:
+                pos = next_pos
+
+            state = (pos, direction)
+            if state in seen_states:
+                # Loop detected
+                loop_found = True
+                break
+            seen_states.add(state)
+
+        if loop_found:
+            loop_count += 1
+
+        # Revert the grid
+        grid[obstruct[0]][obstruct[1]] = original
+
+    # End timing and calculate duration
+    end_time = time.perf_counter()
+    duration = end_time - start_time
+
+    print(f"Part 2 execution time: {duration:.4f} seconds")
+    return loop_count
 
 
 if __name__ == "__main__":
