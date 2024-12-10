@@ -7,14 +7,14 @@ def part1(data: str) -> int:
     """
     Solution for part 1
     """
-    pass
+    return 0
 
 
 def part2(data: str) -> int:
     """
     Solution for part 2
     """
-    pass
+    return 0
 
 
 def main():
