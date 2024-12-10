@@ -2,6 +2,7 @@ from typing import List, Tuple
 import matplotlib.pyplot as plt
 import numpy as np
 from typing import Set, Dict
+from matplotlib.colors import LinearSegmentedColormap
 
 
 def parse_grid(data: str) -> List[List[int]]:
@@ -123,43 +124,72 @@ def read_input():
         return f.read().strip()
 
 
-def visualize_trails(data: str, save_path: str | None = None):
-    """
-    Create a visualization of the topographic map and hiking trails.
+def get_brown_color(
+    height: int, max_height: int = 9
+) -> Tuple[float, float, float, float]:
+    """Generate a contrasting color based on height."""
+    # Use a dark red to burgundy gradient for trails
+    dark_red = np.array([139 / 255, 0 / 255, 0 / 255])  # DarkRed
+    burgundy = np.array([128 / 255, 0 / 255, 32 / 255])  # Burgundy
 
-    Args:
-        data: Input data string
-        save_path: Optional path to save the visualization
-    """
-    # Parse the grid
+    # Calculate color based on height
+    t = height / max_height
+    color = dark_red * (1 - t) + burgundy * t
+    return (*color, 0.8)  # Increased alpha for better visibility
+
+
+def visualize_trails(data: str, save_path: str | None = None):
+    """Create a visualization of the topographic map and hiking trails."""
     grid = parse_grid(data)
     grid_array = np.array(grid)
 
-    # Set up the plot
-    plt.figure(figsize=(12, 12))
+    # Create custom brown colormap
+    light_brown = np.array([210 / 255, 180 / 255, 140 / 255])  # Light brown
+    dark_brown = np.array([101 / 255, 67 / 255, 33 / 255])  # Dark brown
 
-    # Create topographic map
-    plt.imshow(grid_array, cmap="terrain")
+    colors = [
+        (light_brown[0], light_brown[1], light_brown[2]),
+        (dark_brown[0], dark_brown[1], dark_brown[2]),
+    ]
+    n_bins = 100
+    brown_cmap = LinearSegmentedColormap.from_list("custom_brown", colors, N=n_bins)
+
+    plt.figure(figsize=(12, 12))
+    plt.imshow(grid_array, cmap=brown_cmap)
     plt.colorbar(label="Height")
 
-    # Find and visualize trails from each trailhead
     trailheads = find_trailheads(grid)
-    colors = plt.cm.rainbow(np.linspace(0, 1, len(trailheads)))
 
-    for (start_x, start_y), color in zip(trailheads, colors):
+    # Create a proxy artist for the trails legend
+    from matplotlib.lines import Line2D
+
+    trail_proxy = Line2D(
+        [0], [0], color=get_brown_color(5), linewidth=1, label="Trails"
+    )
+
+    for start_x, start_y in trailheads:
         path = {(start_x, start_y)}
 
         def visualize_paths(
             x: int, y: int, height: int, trail_points: List[Tuple[int, int]]
         ):
-            """Recursively find and visualize all possible paths."""
             if grid[x][y] == 9:
-                # Draw the trail
                 trail_points.append((x, y))
                 points = np.array(trail_points)
-                plt.plot(
-                    points[:, 1], points[:, 0], "-", color=color, alpha=0.3, linewidth=1
-                )
+
+                # Draw segments with colors based on height
+                for i in range(len(points) - 1):
+                    pt1, pt2 = points[i : i + 2]
+                    height = grid[pt1[0]][pt1[1]]
+                    color = get_brown_color(height)
+                    plt.plot(
+                        [pt1[1], pt2[1]],
+                        [pt1[0], pt2[0]],
+                        "-",
+                        color=color,
+                        linewidth=1,
+                    )
+
                 trail_points.pop()
                 return
 
@@ -171,128 +201,25 @@ def visualize_trails(data: str, save_path: str | None = None):
                     trail_points.pop()
                     path.remove((next_x, next_y))
 
-        # Start visualization from this trailhead
         visualize_paths(start_x, start_y, 0, [(start_x, start_y)])
 
     # Mark trailheads
     trailhead_x, trailhead_y = zip(*trailheads)
-    plt.plot(trailhead_y, trailhead_x, "wo", markersize=8, label="Trailheads")
+    trailhead_scatter = plt.plot(
+        trailhead_y,
+        trailhead_x,
+        "o",
+        color="white",
+        markersize=8,
+        label="Trailheads",
+        markeredgecolor="black",
+    )[0]
 
-    # Customize plot
     plt.title("Hiking Trails Topographic Map")
     plt.xlabel("X coordinate")
     plt.ylabel("Y coordinate")
-    plt.legend()
+    plt.legend(handles=[trail_proxy, trailhead_scatter])
     plt.grid(True, alpha=0.3)
-
-    if save_path:
-        plt.savefig(save_path, dpi=300, bbox_inches="tight")
-    else:
-        plt.show()
-
-    plt.close()
-
-
-def visualize_trails_3d(data: str, save_path: str | None = None):
-    """
-    Create a 3D visualization of the topographic map and hiking trails.
-
-    Args:
-        data: Input data string
-        save_path: Optional path to save the visualization
-    """
-    # Parse the grid
-    grid = parse_grid(data)
-    grid_array = np.array(grid)
-
-    # Scale down the height values to make elevation changes much less steep
-    height_scale = 0.001  # Reduced by 10x for much flatter terrain
-    scaled_grid = grid_array * height_scale
-
-    # Create coordinate matrices with proper scaling
-    x_scale = 1.0  # Keep original x scale
-    y_scale = 1.0  # Keep original y scale
-    x = np.arange(grid_array.shape[1]) * x_scale
-    y = np.arange(grid_array.shape[0]) * y_scale
-    x, y = np.meshgrid(x, y)
-
-    # Set up the 3D plot
-    fig = plt.figure(figsize=(15, 12))
-    ax = fig.add_subplot(111, projection="3d")
-
-    # Create surface plot with scaled heights but original x,y scales
-    surface = ax.plot_surface(
-        x, y, scaled_grid, cmap="terrain", alpha=0.8, linewidth=0, antialiased=True
-    )
-
-    # Add colorbar showing original height values
-    fig.colorbar(surface, label="Original Height")
-
-    # Find and visualize trails from each trailheads
-    trailheads = find_trailheads(grid)
-    colors = plt.cm.hsv(np.linspace(0, 1, len(trailheads)))
-
-    for (start_x, start_y), color in zip(trailheads, colors):
-        path = {(start_x, start_y)}
-
-        def visualize_paths_3d(
-            x: int, y: int, height: int, trail_points: List[Tuple[int, int]]
-        ):
-            """Recursively find and visualize all possible paths in 3D."""
-            if grid[x][y] == 9:
-                # Draw the trail
-                trail_points.append((x, y))
-                points = np.array(trail_points)
-                # Scale heights for trails and add tiny offset to make them visible
-                heights = np.array(
-                    [
-                        grid[px][py] * height_scale + 0.005 for px, py in trail_points
-                    ]  # Reduced offset
-                )
-                ax.plot3D(
-                    points[:, 1] * x_scale,  # x coordinates with scale
-                    points[:, 0] * y_scale,  # y coordinates with scale
-                    heights,  # z coordinates already scaled
-                    "-",
-                    color=color,
-                    alpha=0.6,
-                    linewidth=2,
-                )
-                trail_points.pop()
-                return
-
-            for next_x, next_y in get_neighbors(x, y, grid):
-                if (next_x, next_y) not in path and grid[next_x][next_y] == height + 1:
-                    path.add((next_x, next_y))
-                    trail_points.append((next_x, next_y))
-                    visualize_paths_3d(next_x, next_y, height + 1, trail_points)
-                    trail_points.pop()
-                    path.remove((next_x, next_y))
-
-        # Start visualization from this trailhead
-        visualize_paths_3d(start_x, start_y, 0, [(start_x, start_y)])
-
-        # Mark trailhead with a sphere (using scaled height but original x,y)
-        ax.scatter(
-            [start_y * x_scale],
-            [start_x * y_scale],
-            [grid[start_x][start_y] * height_scale],
-            color="white",
-            s=100,
-            label="Trailhead" if (start_x, start_y) == trailheads[0] else "",
-        )
-
-    # Customize plot
-    ax.set_title("3D Hiking Trails Topographic Map")
-    ax.set_xlabel("X coordinate")
-    ax.set_ylabel("Y coordinate")
-    ax.set_zlabel("Height")
-
-    # Set the viewing angle for better visualization
-    ax.view_init(elev=20, azim=45)  # Reduced elevation angle for better perspective
-
-    # Add legend
-    ax.legend()
 
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches="tight")
@@ -306,4 +233,3 @@ if __name__ == "__main__":
     data = read_input()
     # Create both 2D and 3D visualizations
     visualize_trails(data, "hiking_trails_map_2d.png")
-    visualize_trails_3d(data, "hiking_trails_map_3d.png")
