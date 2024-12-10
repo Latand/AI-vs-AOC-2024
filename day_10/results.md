@@ -29,3 +29,8 @@
 
 - Part 1: Success
 - Part 2: Success
+
+## gemini-1206.py
+
+- Part 1: Success
+- Part 2: Success

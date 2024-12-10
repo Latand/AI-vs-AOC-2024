@@ -29,3 +29,8 @@
 
 - Part 1:
 - Part 2:
+
+## gemini-1206.py
+
+- Part 1:
+- Part 2:
