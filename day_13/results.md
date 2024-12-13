@@ -1,36 +1,41 @@
 # Results
 
-## o1-preview.py
+## o1-mini.py
 
-- Part 1:
-- Part 2:
+- Part 1: Success
+- Part 2: Failed
 
-## gpt-4o-mini.py
+## o1.py
 
-- Part 1:
-- Part 2:
+- Part 1: Success
+- Part 2: Success
 
 ## claude-3.5-haiku.py
 
-- Part 1:
-- Part 2:
-
-## gpt-4o.py
-
-- Part 1:
-- Part 2:
-
-## claude-3.5-sonnet.py
-
-- Part 1:
-- Part 2:
-
-## o1-mini.py
-
-- Part 1:
-- Part 2:
+- Part 1: Failed
+- Part 2: Failed
 
 ## gemini-1206.py
 
-- Part 1:
-- Part 2:
+- Part 1: Success
+- Part 2: Success
+
+## deepseek.py
+
+- Part 1: Failed
+- Part 2: Failed
+
+## claude-3.5-sonnet.py
+
+- Part 1: Failed
+- Part 2: Failed
+
+## gpt-4o.py
+
+- Part 1: Failed
+- Part 2: Failed
+
+## gpt-4o-mini.py
+
+- Part 1: Failed
+- Part 2: Failed
