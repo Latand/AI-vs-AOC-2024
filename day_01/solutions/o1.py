@@ -1,20 +1,30 @@
-#!/usr/bin/env python3
+def read_input():
+    with open("../input.txt") as f:
+        return f.read().strip()
 
 
 def part1(data: str) -> int:
+    """
+    Solution for part 1
+    """
     pass
 
 
 def part2(data: str) -> int:
+    """
+    Solution for part 2
+    """
     pass
 
 
 def main():
-    with open("../input.txt") as f:
-        data = f.read()
+    data = read_input()
 
-    print(f"Part 1: {part1(data)}")
-    print(f"Part 2: {part2(data)}")
+    result1 = part1(data)
+    print(f"Part 1: {result1}")
+
+    result2 = part2(data)
+    print(f"Part 2: {result2}")
 
 
 if __name__ == "__main__":
