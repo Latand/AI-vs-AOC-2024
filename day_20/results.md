@@ -39,3 +39,8 @@
 
 - Part 1: Failed
 - Part 2: Failed
+
+## deepseek.py
+
+- Part 1: Failed
+- Part 2: Failed
