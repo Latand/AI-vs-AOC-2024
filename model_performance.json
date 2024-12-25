@@ -1,0 +1,844 @@
+{
+  "day01": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 1
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 1
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day02": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 1
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 1
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o-mini": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day03": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 1
+    },
+    "claude-3.5-sonnet": {
+      "part1": 0,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o-mini": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day04": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 1
+    },
+    "deepseek": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day05": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 1
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day06": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 0
+    }
+  },
+  "day07": {
+    "claude-3.5-haiku": {
+      "part1": 0,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 1
+    },
+    "deepseek": {
+      "part1": 0,
+      "part2": 1
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 1
+    },
+    "gpt-4o-mini": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day08": {
+    "claude-3.5-haiku": {
+      "part1": 0,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 1
+    },
+    "deepseek": {
+      "part1": 0,
+      "part2": 1
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day09": {
+    "claude-3.5-haiku": {
+      "part1": 0,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 0,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1-mini": {
+      "part1": 0,
+      "part2": 1
+    }
+  },
+  "day10": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 1
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o-mini": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day11": {
+    "claude-3.5-haiku": {
+      "part1": 0,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day12": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 0
+    }
+  },
+  "day13": {
+    "claude-3.5-haiku": {
+      "part1": 0,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 0,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 0
+    }
+  },
+  "day14": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day15": {
+    "claude-3.5-haiku": {
+      "part1": 0,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 0,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1-mini": {
+      "part1": 0,
+      "part2": 0
+    }
+  },
+  "day16": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 1
+    },
+    "deepseek": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 0
+    }
+  },
+  "day17": {
+    "claude-3.5-haiku": {
+      "part1": 0,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1-mini": {
+      "part1": 0,
+      "part2": 0
+    }
+  },
+  "day18": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 1
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 1
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 0,
+      "part2": 0
+    }
+  },
+  "day19": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 1
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 1
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 1
+    }
+  },
+  "day20": {
+    "claude-3.5-haiku": {
+      "part1": 0,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 0,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 0,
+      "part2": 0
+    }
+  },
+  "day21": {
+    "claude-3.5-haiku": {
+      "part1": 0,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 0,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1-mini": {
+      "part1": 0,
+      "part2": 0
+    }
+  },
+  "day22": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 0
+    }
+  },
+  "day23": {
+    "claude-3.5-haiku": {
+      "part1": 1,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 1,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 1
+    },
+    "gpt-4o": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 1
+    },
+    "o1-mini": {
+      "part1": 1,
+      "part2": 0
+    }
+  },
+  "day24": {
+    "claude-3.5-haiku": {
+      "part1": 0,
+      "part2": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 0,
+      "part2": 0
+    },
+    "deepseek": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gemini-1206": {
+      "part1": 1,
+      "part2": 0
+    },
+    "gpt-4o": {
+      "part1": 0,
+      "part2": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 0,
+      "part2": 0
+    },
+    "o1": {
+      "part1": 1,
+      "part2": 0
+    },
+    "o1-mini": {
+      "part1": 0,
+      "part2": 0
+    }
+  },
+  "day25": {
+    "claude-3.5-haiku": {
+      "part1": 0
+    },
+    "claude-3.5-sonnet": {
+      "part1": 0
+    },
+    "deepseek": {
+      "part1": 1
+    },
+    "gemini-1206": {
+      "part1": 0
+    },
+    "gpt-4o": {
+      "part1": 0
+    },
+    "gpt-4o-mini": {
+      "part1": 1
+    },
+    "o1": {
+      "part1": 1
+    },
+    "o1-mini": {
+      "part1": 1
+    }
+  }
+}

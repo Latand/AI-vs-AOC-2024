@@ -1,55 +1,70 @@
 from collections import deque
 
+moves = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-def read_input():
-    with open("../input.txt") as f:
-        return [tuple(map(int, line.strip().split(","))) for line in f if line.strip()]
+
+def is_valid(x, y, grid_size):
+    return 0 <= x < grid_size and 0 <= y < grid_size
 
 
 def bfs(start, end, corrupted, grid_size):
-    queue = deque()
-    queue.append((start[0], start[1], 0))
-    visited = set()
-    visited.add((start[0], start[1]))
+    queue = deque([start])
+    visited = set([start])
+    steps = 0
     while queue:
-        x, y, steps = queue.popleft()
-        if (x, y) == end:
-            return steps
-        moves = [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
-        for nx, ny in moves:
-            if 0 <= nx < grid_size and 0 <= ny < grid_size:
-                if (nx, ny) not in corrupted and (nx, ny) not in visited:
+        for _ in range(len(queue)):
+            x, y = queue.popleft()
+            if (x, y) == end:
+                return steps
+            for dx, dy in moves:
+                nx, ny = x + dx, y + dy
+                if (
+                    is_valid(nx, ny, grid_size)
+                    and (nx, ny) not in corrupted
+                    and (nx, ny) not in visited
+                ):
                     visited.add((nx, ny))
-                    queue.append((nx, ny, steps + 1))
-    return None  # No path found
+                    queue.append((nx, ny))
+        steps += 1
+    return -1  # no path found
 
 
-def part1(data):
-    corrupted = set(data[:1024])
-    path_length = bfs((0, 0), (70, 70), corrupted, 71)
-    return path_length
+def read_input():
+    with open("../input.txt") as f:
+        lines = f.read().strip().splitlines()
+    byte_positions = []
+    for line in lines:
+        x, y = map(int, line.strip().split(","))
+        byte_positions.append((x, y))
+    return byte_positions
 
 
-def part2(data):
+def part1(byte_positions, grid_size=71):
+    corrupted = set(byte_positions[:1024])
+    steps = bfs((0, 0), (grid_size - 1, grid_size - 1), corrupted, grid_size)
+    return steps
+
+
+def part2(byte_positions, grid_size=71):
     corrupted = set()
-    # Initial check
-    if bfs((0, 0), (70, 70), corrupted, 71) is None:
-        return "No initial path exists."
-    for byte in data:
-        corrupted.add(byte)
-        if bfs((0, 0), (70, 70), corrupted, 71) is None:
-            return f"{byte[0]},{byte[1]}"
-    return "All bytes processed, path still exists."
+    for pos in byte_positions:
+        corrupted.add(pos)
+        if bfs((0, 0), (grid_size - 1, grid_size - 1), corrupted, grid_size) == -1:
+            return pos
+    return None
 
 
 def main():
-    data = read_input()
+    byte_positions = read_input()
     # Part one
-    result1 = part1(data)
-    print(f"Part 1: {result1}")
+    steps = part1(byte_positions)
+    print(f"Part 1: {steps}")
     # Part two
-    result2 = part2(data)
-    print(f"Part 2: {result2}")
+    blocking_byte = part2(byte_positions)
+    if blocking_byte:
+        print(f"Part 2: {blocking_byte[0]},{blocking_byte[1]}")
+    else:
+        print("Part 2: No byte blocks the path")
 
 
 if __name__ == "__main__":

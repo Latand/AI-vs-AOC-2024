@@ -1,20 +1,66 @@
+import itertools
+from typing import List, Tuple
+
+
 def read_input():
     with open("../input.txt") as f:
-        return f.read().strip()
+        return f.read().strip().splitlines()
 
 
-def part1(data: str) -> int:
+def evaluate_expression(numbers: List[int], operators: List[str]) -> int:
     """
-    Solution for part 1
+    Evaluate the expression formed by inserting the given operators between numbers.
+    Operators are evaluated left-to-right.
     """
-    pass
+    result = numbers[0]
+    for i, op in enumerate(operators):
+        if op == "+":
+            result += numbers[i + 1]
+        elif op == "*":
+            result *= numbers[i + 1]
+        elif op == "||":
+            result = int(str(result) + str(numbers[i + 1]))
+    return result
 
 
-def part2(data: str) -> int:
+def valid_combinations(target: int, numbers: List[int]) -> bool:
     """
-    Solution for part 2
+    Check if any combination of operators can produce the target value from the numbers.
     """
-    pass
+    num_operators = len(numbers) - 1
+    for ops in itertools.product(["+", "*", "||"], repeat=num_operators):
+        try:
+            if evaluate_expression(numbers, ops) == target:
+                return True
+        except ValueError:
+            continue
+    return False
+
+
+def parse_line(line: str) -> Tuple[int, List[int]]:
+    """Parse a single line into target and numbers."""
+    target, nums = line.split(": ")
+    return int(target), list(map(int, nums.split()))
+
+
+def part1(data: List[str]) -> int:
+    """Solve part 1 of the challenge."""
+    total = 0
+    for line in data:
+        target, numbers = parse_line(line)
+        if valid_combinations(target, numbers):
+            total += target
+    return total
+
+
+def part2(data: List[str]) -> int:
+    """Solve part 2 of the challenge."""
+    total = 0
+    for line in data:
+        target, numbers = parse_line(line)
+        if valid_combinations(target, numbers):
+            total += target
+    return total
 
 
 def main():

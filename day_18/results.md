@@ -34,3 +34,8 @@
 
 - Part 1: Success
 - Part 2: Failed
+
+## deepseek.py
+
+- Part 1: Success
+- Part 2: Success

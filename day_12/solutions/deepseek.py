@@ -1,9 +1,10 @@
+import sys
 from collections import deque
 
 
 def read_input():
     with open("../input.txt") as f:
-        return [line.strip() for line in f.readlines()]
+        return [list(line.strip()) for line in f.readlines()]
 
 
 def get_neighbors(r, c, rows, cols):
@@ -14,38 +15,25 @@ def get_neighbors(r, c, rows, cols):
             yield nr, nc
 
 
-def bfs(start_r, start_c, grid, visited, rows, cols, plant_type):
+def bfs_region(grid, visited, start_r, start_c, rows, cols):
     queue = deque()
     queue.append((start_r, start_c))
-    visited[start_r][start_c] = True
-    region = []
-
+    visited.add((start_r, start_c))
+    region = set()
+    region.add((start_r, start_c))
+    region_type = grid[start_r][start_c]
     while queue:
         r, c = queue.popleft()
-        region.append((r, c))
         for nr, nc in get_neighbors(r, c, rows, cols):
-            if not visited[nr][nc] and grid[nr][nc] == plant_type:
-                visited[nr][nc] = True
+            if (nr, nc) not in visited and grid[nr][nc] == region_type:
+                visited.add((nr, nc))
+                region.add((nr, nc))
                 queue.append((nr, nc))
+    return region
 
-    area = len(region)
+
+def calculate_perimeter_part1(region, grid, rows, cols):
     perimeter = 0
-    for r, c in region:
-        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-            nr, nc = r + dr, c + dc
-            if (
-                nr < 0
-                or nr >= rows
-                or nc < 0
-                or nc >= cols
-                or grid[nr][nc] != plant_type
-            ):
-                perimeter += 1
-    return area, perimeter, region
-
-
-def calculate_sides(region, grid, rows, cols):
-    edges = set()
     for r, c in region:
         for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             nr, nc = r + dr, c + dc
@@ -56,77 +44,70 @@ def calculate_sides(region, grid, rows, cols):
                 or nc >= cols
                 or grid[nr][nc] != grid[r][c]
             ):
-                if dr == -1 and dc == 0:
-                    edges.add(((r, c), "top"))
-                elif dr == 1 and dc == 0:
-                    edges.add(((r, c), "bottom"))
-                elif dr == 0 and dc == -1:
-                    edges.add(((r, c), "left"))
-                elif dr == 0 and dc == 1:
-                    edges.add(((r, c), "right"))
-
-    edges = list(edges)
-    if not edges:
-        return 0
-
-    # Sort edges to traverse them in order
-    # This is a simplified approach and may not work for all shapes
-    # A more robust approach would be needed for complex shapes
-    edges_sorted = sorted(edges, key=lambda x: (x[0][0], x[0][1]))
-    current_pos, current_dir = edges_sorted[0]
-    sides = 1
-    directions = {"top": (0, -1), "bottom": (0, 1), "left": (-1, 0), "right": (1, 0)}
-
-    current_dir_vector = directions[current_dir]
-    for i in range(1, len(edges_sorted)):
-        pos, dir = edges_sorted[i]
-        dir_vector = directions[dir]
-        if dir_vector != current_dir_vector:
-            sides += 1
-            current_dir_vector = dir_vector
-
-    return sides
+                perimeter += 1
+    return perimeter
 
 
-def part1(grid):
-    rows, cols = len(grid), len(grid[0])
-    visited = [[False for _ in range(cols)] for _ in range(rows)]
-    total_price = 0
-    for r in range(rows):
-        for c in range(cols):
-            if not visited[r][c]:
-                plant_type = grid[r][c]
-                area, perimeter, _ = bfs(r, c, grid, visited, rows, cols, plant_type)
-                price = area * perimeter
-                total_price += price
-    return total_price
-
-
-def part2(grid):
-    rows, cols = len(grid), len(grid[0])
-    visited = [[False for _ in range(cols)] for _ in range(rows)]
-    total_price = 0
-    for r in range(rows):
-        for c in range(cols):
-            if not visited[r][c]:
-                plant_type = grid[r][c]
-                _, _, region = bfs(r, c, grid, visited, rows, cols, plant_type)
-                area = len(region)
-                sides = calculate_sides(region, grid, rows, cols)
-                price = area * sides
-                total_price += price
-    return total_price
+def calculate_straight_sections(region, grid, rows, cols):
+    # Find the starting boundary cell
+    min_r, min_c = min(region)
+    start = min_r, min_c
+    # Define movement directions in clockwise order
+    dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # Right, Down, Left, Up
+    # Initialize traversal
+    current_dir = 0  # Start with right
+    straight_sections = 1  # At least one straight section
+    visited_boundary = set()
+    prev_r, prev_c = start
+    cr, cc = start
+    while True:
+        visited_boundary.add((cr, cc))
+        # Determine next direction
+        found = False
+        for i in range(4):
+            nd = (current_dir + i) % 4
+            dr, dc = dirs[nd]
+            nr, nc = cr + dr, cc + dc
+            if (nr, nc) in region and (nr, nc) not in visited_boundary:
+                # Turn to this direction
+                if i != 0:
+                    straight_sections += 1
+                current_dir = nd
+                prev_r, prev_c = cr, cc
+                cr, cc = nr, nc
+                found = True
+                break
+        if not found:
+            break
+        if (cr, cc) == start and len(visited_boundary) > 1:
+            break
+    return straight_sections
 
 
 def main():
     grid = read_input()
-    if not grid:
-        print("No input grid provided.")
-        return
-    result1 = part1(grid)
-    print(f"Part 1: {result1}")
-    result2 = part2(grid)
-    print(f"Part 2: {result2}")
+    rows = len(grid)
+    cols = len(grid[0]) if rows > 0 else 0
+    visited = set()
+    total_price_part1 = 0
+    total_price_part2 = 0
+    for r in range(rows):
+        for c in range(cols):
+            if (r, c) not in visited:
+                region = bfs_region(grid, visited, r, c, rows, cols)
+                area = len(region)
+                # Part 1: Calculate perimeter
+                perimeter_part1 = calculate_perimeter_part1(region, grid, rows, cols)
+                price_part1 = area * perimeter_part1
+                total_price_part1 += price_part1
+                # Part 2: Calculate number of straight sections
+                straight_sections = calculate_straight_sections(
+                    region, grid, rows, cols
+                )
+                price_part2 = area * straight_sections
+                total_price_part2 += price_part2
+    print(f"Part 1 Total Price: {total_price_part1}")
+    print(f"Part 2 Total Price: {total_price_part2}")
 
 
 if __name__ == "__main__":

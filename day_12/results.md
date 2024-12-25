@@ -1,6 +1,6 @@
 # Results
 
-## o1-preview.py
+## o1.py
 
 - Part 1: Success
 - Part 2: Failed
@@ -31,6 +31,11 @@
 - Part 2: Failed
 
 ## gemini-1206.py
+
+- Part 1: Success
+- Part 2: Failed
+
+## deepseek.py
 
 - Part 1: Success
 - Part 2: Failed
