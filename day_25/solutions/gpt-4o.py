@@ -3,11 +3,37 @@ def read_input():
         return f.read().strip()
 
 
+def parse_schematics(data: str):
+    blocks = data.split("\n\n")
+    locks = []
+    keys = []
+
+    for block in blocks:
+        lines = block.splitlines()
+        # Skip the first and last rows
+        heights = [sum(1 for char in col if char == "#") for col in zip(*lines[1:-1])]
+        if lines[0].strip() == "#####":
+            locks.append(heights)
+        else:
+            keys.append(heights)
+
+    return locks, keys
+
+
+def can_fit(lock, key):
+    return all(l + k < 7 for l, k in zip(lock, key))
+
+
 def part1(data: str) -> int:
-    """
-    Solution for part 1
-    """
-    pass
+    locks, keys = parse_schematics(data)
+    count = 0
+
+    for lock in locks:
+        for key in keys:
+            if can_fit(lock, key):
+                count += 1
+
+    return count
 
 
 def part2(data: str) -> int:
